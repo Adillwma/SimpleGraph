@@ -4,13 +4,14 @@
 
 
 <center>
-    <img src="Images/SimpleGraph%20Logo.png" width="300"> 
-</center>
 
+<img src="Images/SimpleGraph%20Logo.png" width="300"> 
+    
     - Laboratory quick data analysis
     - Verifying data whilst setting up experiments
     - Quickly creating publication ready plots
 
+</center>
 
 
 
