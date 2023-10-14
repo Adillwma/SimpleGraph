@@ -1,20 +1,19 @@
-import sys
-#import numpy as np
-from PyQt6 import QtWidgets, uic, QtCore
-from PyQt6.QtCore import Qt
-#from matplotlib.figure import Figure
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_qtagg import FigureCanvas
-#from matplotlib.ticker import ScalarFormatter
-
-
-
-
 
 ### ADD ALPHA AND MARKER SETTINGS FOR THE PLOTS
 ### FIX THE LEGEND ERROR WHEN PLOTTING BOTH SCATTER AND LINE PLOTS AND IT MAKING TWO LEGEND ENTRIES, PERHAPS HAVE ONE SINGLE COLOUR SELECTOR FOR BOTH AND THEN JUST HAVE A COLOUR LEGEND 
+### SIMPLIFY THE SAVING OF THE TEXT FILE WITH RAW DATA TO USE THE NEW LOOPING CODE 
 
-# SETTING DEFAULTS
+
+#%% - Dependencies
+import sys
+import matplotlib.pyplot as plt
+from PyQt6.QtCore import Qt
+from PyQt6 import QtWidgets, uic
+from matplotlib.backends.backend_qtagg import FigureCanvas
+
+
+
+#%% - SETTING DEFAULTS
 x_data_1_str = ""
 x_data_2_str = ""
 x_data_3_str = ""
@@ -48,6 +47,7 @@ y_lim_str = ""
 
 grid_enabled = True
 grid_alpha = 0.5
+save_raw_data = True
 
 scatter_enabled_1 = True
 scatter_enabled_2 = True
@@ -69,8 +69,8 @@ line_color_2 = 'purple'
 line_color_3 = 'green'
 line_color_4 = 'red'
 
-# CREATING APP
-Form, Window = uic.loadUiType("SimpleGraph3.ui")
+#%% - CREATING APP
+Form, Window = uic.loadUiType("SimpleGraph.ui")
 app = QtWidgets.QApplication([])
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -80,8 +80,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.form = Form()
         self.form.setupUi(self)
 
-    def init_plot(self, x_data_1, y_data_1, legend_label_1, x_label, y_label, plot_title, x_lim, y_lim, grid_enabled, grid_alpha, scatter_enabled_1, line_enabled_1, scatter_color_1, line_color_1):
+    def init_plot(self, x_data_1, y_data_1, legend_label_1, x_label, y_label, plot_title, x_lim, y_lim, grid_enabled, grid_alpha, scatter_enabled_1, line_enabled_1, scatter_color_1, line_color_1, save_raw_data):
         
+        self.save_raw_data = save_raw_data
+
         # Access the 'frame' widget from your UI
         frame_widget = self.form.plot_frame
 
@@ -267,6 +269,76 @@ class MainWindow(QtWidgets.QMainWindow):
         if file_path:
             self.figure.savefig(file_path, dpi=100)
 
+            if self.save_raw_data:
+                # take the file path and remove the file extension and add .txt to the end to create a text file with the same name as the plot file
+                raw_data_file_path = file_path[:-4] + ".txt"
+
+                # open the file in write mode and write the raw data to it
+                with open(raw_data_file_path, "w") as f:
+                    
+                    # check if any of the plot titles or axis titles have been changed by the user, if so then write to file
+                    if self.plot_title or self.x_label or self.y_label:
+                        if self.plot_title:
+                            f.write("Plot Title: " + self.plot_title + "\n")
+                        if self.x_label:
+                            f.write("X Label: " + self.x_label + "\n")
+                        if self.y_label:
+                            f.write("Y Label: " + self.y_label + "\n")
+
+                        f.write("\n") # add a blank line to the file to seperate the data
+
+
+                    
+                    if self.legend_label_1:                                    # Add data label 1 if exists to the file, if not add a string saying "Data 1" to the file
+                        f.write("Data: " + self.legend_label_1 + "\n")
+                    else:
+                        f.write("Data: Data 1\n")
+                    f.write(str(self.x_data_1) + "\n") 
+                    f.write(str(self.y_data_1) + "\n")
+
+                    f.write("\n") # add a blank line to the file to seperate the data
+                    if self.legend_label_2:                                   # Add data label 2 if exists to the file, if not add a string saying "Data 2" to the file
+                        f.write("Data: " + self.legend_label_2 + "\n")
+                    else:
+                        f.write("Data: Data 2\n")
+                    f.write(str(self.x_data_2) + "\n")
+                    f.write(str(self.y_data_2) + "\n")
+
+                    f.write("\n") # add a blank line to the file to seperate the data
+                    if self.legend_label_3:                                    # Add data label 3 if exists to the file, if not add a string saying "Data 3" to the file
+                        f.write("Data: " + self.legend_label_3 + "\n")
+                    else:
+                        f.write("Data: Data 3\n")
+                    f.write(str(self.x_data_3) + "\n")
+                    f.write(str(self.y_data_3) + "\n")
+
+
+                    f.write("\n") # add a blank line to the file to seperate the data
+                    if self.legend_label_4:                                # Add data label 4 if exists to the file, if not add a string saying "Data 4" to the file
+                        f.write("Data: " + self.legend_label_4 + "\n")
+                    else:
+                        f.write("Data: Data 4\n")
+                    f.write(str(self.x_data_4) + "\n")
+                    f.write(str(self.y_data_4) + "\n")
+
+                    """
+                    # Define data labels and corresponding x and y data
+                    data_entries = [
+                        (self.legend_label_1, self.x_data_1, self.y_data_1),
+                        (self.legend_label_2, self.x_data_2, self.y_data_2),
+                        (self.legend_label_3, self.x_data_3, self.y_data_3),
+                        (self.legend_label_4, self.x_data_4, self.y_data_4)
+                    ]
+
+                    for label, x_data, y_data in data_entries:
+                        if label:
+                            f.write(("Data:", label))
+                        else:
+                            f.write(("Data:", "Data " + str(data_entries.index((label, x_data, y_data)) + 1)))
+                        f.write((str(x_data), str(y_data)))
+                        f.write(("",))  # Add a blank line
+                    """
+
     def define_x_lim(self):
         x_lim_str = self.form.x_limits_input.text()
         if x_lim_str.strip():
@@ -354,7 +426,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_x_data_1(self):
         x_data_1_str = self.form.x_data_input_1.text()
         try:
-            self.x_data_1 = [float(x) for x in x_data_1_str.split(',') if x.strip()]
+            x_data_1_str = x_data_1_str.replace(',', ' ')
+            self.x_data_1 = [float(x) for x in x_data_1_str.split() if x.strip()]            
             self.define_x_lim()
         except ValueError:   # protection from user entering illigal charecters in the data box. i.e anytihg other than numbers, spaces or commas. 
             pass
@@ -362,7 +435,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_y_data_1(self):
         y_data_1_str = self.form.y_data_input_1.text()
         try:
-            self.y_data_1 = [float(y) for y in y_data_1_str.split(',') if y.strip()]
+            y_data_1_str = y_data_1_str.replace(',', ' ')
+            self.y_data_1 = [float(y) for y in y_data_1_str.split() if y.strip()]
             self.define_y_lim()
         except ValueError:
             pass
@@ -370,7 +444,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_x_data_2(self):
         x_data_2_str = self.form.x_data_input_2.text()
         try:
-            self.x_data_2 = [float(x) for x in x_data_2_str.split(',') if x.strip()]
+            x_data_2_str = x_data_2_str.replace(',', ' ')
+            self.x_data_2 = [float(x) for x in x_data_2_str.split() if x.strip()]
             self.define_x_lim()
         except ValueError:
             pass
@@ -378,7 +453,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_y_data_2(self):
         y_data_2_str = self.form.y_data_input_2.text()
         try:
-            self.y_data_2 = [float(y) for y in y_data_2_str.split(',') if y.strip()]
+            y_data_2_str = y_data_2_str.replace(',', ' ')
+            self.y_data_2 = [float(y) for y in y_data_2_str.split() if y.strip()]
             self.define_y_lim()
         except ValueError:
             pass
@@ -386,7 +462,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_x_data_3(self):
         x_data_3_str = self.form.x_data_input_3.text()
         try:
-            self.x_data_3 = [float(x) for x in x_data_3_str.split(',') if x.strip()]
+            x_data_3_str = x_data_3_str.replace(',', ' ')
+            self.x_data_3 = [float(x) for x in x_data_3_str.split() if x.strip()]
             self.define_x_lim()
         except ValueError:
             pass
@@ -394,7 +471,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_y_data_3(self):
         y_data_3_str = self.form.y_data_input_3.text()
         try:
-            self.y_data_3 = [float(y) for y in y_data_3_str.split(',') if y.strip()]
+            y_data_3_str = y_data_3_str.replace(',', ' ')
+            self.y_data_3 = [float(y) for y in y_data_3_str.split() if y.strip()]
             self.define_y_lim()
         except ValueError:
             pass
@@ -402,7 +480,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_x_data_4(self):
         x_data_4_str = self.form.x_data_input_4.text()
         try:
-            self.x_data_4 = [float(x) for x in x_data_4_str.split(',') if x.strip()]
+            x_data_4_str = x_data_4_str.replace(',', ' ')
+            self.x_data_4 = [float(x) for x in x_data_4_str.split() if x.strip()]
             self.define_x_lim()
         except ValueError:
             pass
@@ -410,7 +489,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_y_data_4(self):
         y_data_4_str = self.form.y_data_input_4.text()
         try:
-            self.y_data_4 = [float(y) for y in y_data_4_str.split(',') if y.strip()]
+            y_data_4_str = y_data_4_str.replace(',', ' ')
+            self.y_data_4 = [float(y) for y in y_data_4_str.split() if y.strip()]
             self.define_y_lim()
         except ValueError:
             pass
@@ -446,8 +526,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.update_plot()
 
     
-
-
+    def update_save_raw_data(self, checked):
+        if checked:
+            self.save_raw_data = True
+        else:
+            self.save_raw_data = False
+        self.update_plot()
 
 
     def update_plot(self):
@@ -494,12 +578,12 @@ class MainWindow(QtWidgets.QMainWindow):
             pass
 
 
+#%% - Initialising the app
 window = MainWindow()
-window.show()
 
-window.init_plot(x_data_1, y_data_1, legend_label_1, x_label, y_label, plot_title, x_lim, y_lim, grid_enabled, grid_alpha, scatter_enabled_1, line_enabled_1, scatter_color_1, line_color_1)
 
-# Connect signals to slots for various controls
+
+#%% - Connect signals to slots for various controls
 window.form.showgrid_checkbox.stateChanged.connect(window.show_grid_changed)
 window.form.grid_alpha_slider.valueChanged.connect(window.grid_alpha_changed)
 
@@ -523,20 +607,8 @@ window.form.scatter_color_input_4.currentTextChanged.connect(window.scatter_colo
 window.form.showline_checkbox_4.stateChanged.connect(window.show_line_changed_4)
 window.form.line_color_input_4.currentTextChanged.connect(window.line_color_4_changed)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 window.form.saveplot_button.clicked.connect(window.save_plot)
+window.form.save_rawdata_checkbox.stateChanged.connect(window.update_save_raw_data)
 window.form.pingui_checkbox.stateChanged.connect(window.toggle_pin_to_top)
 
 window.form.x_data_input_1.editingFinished.connect(window.update_x_data_1)
@@ -565,13 +637,13 @@ window.form.y_limits_input.editingFinished.connect(window.define_y_lim)
 
 
 
-# setting defulats for backend 
-
+window.init_plot(x_data_1, y_data_1, legend_label_1, x_label, y_label, plot_title, x_lim, y_lim, grid_enabled, grid_alpha, scatter_enabled_1, line_enabled_1, scatter_color_1, line_color_1, save_raw_data)
 
 # Set default value for the "Pin GUI to Top" checkbox
 window.form.pingui_checkbox.setChecked(True)  # Set to True if you want it checked by default
+window.form.save_rawdata_checkbox.setChecked(True)  # Set to True if you want it checked by default
 
-
-
+#%% - Start the Qt event loop
+window.show()
 
 sys.exit(app.exec())

@@ -1,22 +1,22 @@
+<center>
 
-<p align="center">
+# SimpleGraph
+### Author: Adill Al-Ashgar
+#### Simple Windows GUI to create publication ready plots, with no code needed.
 
-    # SimpleGraph
-    ### Author: Adill Al-Ashgar
-    #### Simple Windows GUI to create publication ready plots, with no code needed.
+<img src="Images/SimpleGraph%20Logo.png" width="300"> 
 
-</p>
+    - Laboratory quick data analysis
+    - Verifying data whilst setting up experiments
+    - Quickly creating publication ready plots
+
+[![Github Repo](https://img.shields.io/badge/GitHub_Repo-SimpleGraph-yellow.svg)](https://github.com/Adillwma/SimpleGraph)
+[![Language](https://img.shields.io/badge/language-Python-blue.svg)](https://www.python.org/) 
+[![Published](https://img.shields.io/badge/Published-2023-purple.svg)]()
+</center>
 
 
-    <img src="Images/SimpleGraph%20Logo.png" width="300"> 
 
-        - Laboratory quick data analysis
-        - Verifying data whilst setting up experiments
-        - Quickly creating publication ready plots
-
-    [![Github Repo](https://img.shields.io/badge/GitHub_Repo-SimpleGraph-yellow.svg)](https://github.com/Adillwma/SimpleGraph)
-    [![Language](https://img.shields.io/badge/language-Python-blue.svg)](https://www.python.org/) 
-    [![Published](https://img.shields.io/badge/Published-2023-purple.svg)]()
 
 
 
