@@ -5,11 +5,12 @@
 
 <center>
     <img src="Images/SimpleGraph%20Logo.png" width="300"> 
+</center>
 
     - Laboratory quick data analysis
     - Verifying data whilst setting up experiments
     - Quickly creating publication ready plots
-</center>
+
 
 
 
