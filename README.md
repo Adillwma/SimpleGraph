@@ -35,7 +35,7 @@
 
 
 # Installation
-The program is written in Python, using the matplotlib library to generate the plot and PyQT6 to create the GUI. For ease of use the program is packaged into a single executable file, using PyInstaller. To run the program, download the SimpleGraph V1.0.0.exe file and run it. The program is currently only available for Windows, but can be run on other operating systems by installing Python and running the code directly. Avast antivirus specifically may flag the program as a virus, this is a false positive.
+The program is written in Python, using the matplotlib library to generate the plot and PyQT6 to create the GUI. For ease of use the program is packaged into a single executable file, using PyInstaller. To run the program, download the SimpleGraph V1.0.0.exe file and run it. The program is currently only available for Windows, but can be run on other operating systems by installing Python and running the code directly.
 
 ### Windows
 To install the program on Windows, download the SimpleGraph V1.0.0.exe file and run it. 
@@ -55,6 +55,17 @@ pip install PyQt6
 The program is designed to be as simple as possible to use. The user can manually enter data and the program will generate the plot. The user can then save the plot as an image file. The program also allows the user to change some plotting settings to adjust the plot to their liking. The program is designed to be used in a laboratory setting, where the user may want to quickly plot some data to verify it, or to create a publication ready plot. The program is not designed to be a replacement for more advanced plotting software, such as Origin or Matlab or wokring directly in Python.
 
 
+<div align="center">
+<img src="Images/SimpleGraph_GUIV1.png" width="500"> 
+
+</div>
+
+
+
+<div align="center">
+<img src="Images/e.png" width="300"> 
+
+</div>
 
 
 # License
@@ -65,4 +76,5 @@ Contributions to this codebase are welcome! If you encounter any issues, bugs or
 
 # Contact
 For any further inquiries or for assistance in running the simulation, please feel free to reach out to me at adill@neuralworkx.com.
+
 
