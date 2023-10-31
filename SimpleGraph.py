@@ -17,6 +17,12 @@ from matplotlib.backends.backend_qtagg import FigureCanvas
 import numpy as np
 from scipy.stats import linregress 
 from scipy.optimize import curve_fit
+import pyi_splash
+
+# Close the splash screen. It does not matter when the call
+# to this function is made, the splash screen remains open until
+# this function is called or the Python program is terminated.
+pyi_splash.close()
 
 def fit_data(x, y, fit_selection, num_points=100):
     # Generate a new range of x-values for the fit line
