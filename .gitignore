@@ -3,3 +3,5 @@ __pycache__/
 Private/
 build/
 dist/
+pyinstaller_config.json
+Old ui's/

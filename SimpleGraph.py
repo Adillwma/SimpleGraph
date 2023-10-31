@@ -2,9 +2,11 @@
 # Author: Adill Al-Ashgar
 
 ### Improvements to make:
-### ADD ALPHA AND MARKER SETTINGS FOR THE PLOTS
 ### SIMPLIFY THE SAVING OF THE TEXT FILE WITH RAW DATA TO USE THE NEW LOOPING CODE 
 ### MAKE SURE FILE SAVE DIALOG GOES TO LAST SAVED IN DIRECTORY FROM THE PROGRAM TO SAAVE USER HUNTING FOR DIR EACH TME
+### Offer user checkbox for legend on plot or to side of plot
+### Adjust plot save quality with either plot size or dpi ??
+### IMPORTANT!!! _ FIX bug where program crashes if user enters text into the limits fileds, also check all fiels for entry of wrong types and add protections
 
 #%% - Dependencies
 import sys
@@ -15,7 +17,6 @@ from matplotlib.backends.backend_qtagg import FigureCanvas
 import numpy as np
 from scipy.stats import linregress 
 from scipy.optimize import curve_fit
-
 
 def fit_data(x, y, fit_selection, num_points=100):
     # Generate a new range of x-values for the fit line
@@ -94,7 +95,7 @@ line_color_3 = 'green'
 line_color_4 = 'red'
 
 #%% - CREATING APP
-Form, Window = uic.loadUiType("SimpleGraph.ui")
+Form, Window = uic.loadUiType("SimpleGraph3.ui")
 app = QtWidgets.QApplication([])
 
 class MainWindow(QtWidgets.QMainWindow):
