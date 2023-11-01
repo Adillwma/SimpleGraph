@@ -60,15 +60,15 @@ To use SimpleGraph:
 
 1. Open the application.
 
-2. Manually enter your data, either by typing it directly into the interface or by loading it from a file.
+2. Enter some x and y data for at least one data series. This data can be comma seperated or just seperated by spaces.
 
-3. Customize your plot by adjusting various plotting settings, such as axis labels, titles, and plot types.
+3. As you enter data the plot display will be automatically updated to give a live preview.
 
-4. Click the "Generate Plot" button to create your graph.
+4. Save the plot as a PNG image file at any time by clicking the "Save Plot" button.
 
-5. Save the plot as an image file (e.g., PNG) by clicking the "Save Plot" button.
+5. Additional fields exist in case you wish to customize your plot by adding a title, axis labels, error bars, line-of-fits and selecting plot types.
 
-It's important to note that SimpleGraph is not intended to replace more advanced plotting software like Origin, Matlab, or creating custom Python plots for complex data visualization tasks. Instead, it aims to provide a quick and simple solution for basic data plotting and may be just what you need.
+It's important to note that SimpleGraph is not intended to replace more advanced plotting software like Origin, Matlab, or creating custom Python plots for complex data visualization tasks. Instead, it aims to provide a quick and simple solution for basic data plotting and may be just what you need in a pinch.
 
 <div align="center">
 <img src="Images/SimpleGraph_GUIV1.png" width="500"> 
