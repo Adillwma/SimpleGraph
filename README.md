@@ -6,10 +6,10 @@
 
 <img src="Images/SimpleGraph%20Logo.png" width="300"> 
 
-    - Laboratory quick data analysis
-    - Verifying data whilst setting up experiments
-    - Quickly creating publication ready plots
-
+    - Quick data analysis
+    - Creating simple publication ready plots
+    - Visulising trends on the fly during data collection
+ 
 [![Github Repo](https://img.shields.io/badge/GitHub_Repo-SimpleGraph-yellow.svg)](https://github.com/Adillwma/SimpleGraph)
 [![Language](https://img.shields.io/badge/Language-Python-blue.svg)](https://www.python.org/) 
 [![Published](https://img.shields.io/badge/Published-2023-purple.svg)]()
