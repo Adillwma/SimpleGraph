@@ -6,14 +6,6 @@
 
 <img src="Images/SimpleGraph%20Logo.png" width="300">
 
-
-    - Quick data analysis
-    - Creating simple publication ready plots
-    - Visulising trends on the fly during data collection
-
-dsf
-
-
     - Quick data analysis
     - Creating simple publication ready plots
     - Visulising trends on the fly during data collection
